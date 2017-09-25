@@ -14,31 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>im/Phone.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Desktop/%C4%90%E1%BB%93%20%C3%81n/img/Phone.png</locationURI>
-		</link>
-		<link>
-			<name>im/loc.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Desktop/%C4%90%E1%BB%93%20%C3%81n/img/loc.png</locationURI>
-		</link>
-		<link>
-			<name>im/play.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Desktop/%C4%90%E1%BB%93%20%C3%81n/img/play.png</locationURI>
-		</link>
-		<link>
-			<name>im/saveicon.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Desktop/%C4%90%E1%BB%93%20%C3%81n/img/saveicon.png</locationURI>
-		</link>
-		<link>
-			<name>im/xoa.png</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Desktop/%C4%90%E1%BB%93%20%C3%81n/img/xoa.png</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
