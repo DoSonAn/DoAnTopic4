@@ -1053,7 +1053,7 @@ public class tools {
 			}
 		});
 		
-		JButton btnLyHnhnh = new JButton("Lấy hình ảnh");
+		JButton btnLyHnhnh = new JButton("Lấy cmt");
 		btnLyHnhnh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				link = txtNhpaCh.getText();					
