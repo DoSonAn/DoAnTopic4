@@ -7,17 +7,25 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TestPhone {
 
 	public static void main(String[] args) {
-		String link ="https://www.thegioididong.com/sim-so-dep?t=4";
+		
+		
+		
+		
+		String link ="https://www.thegioididong.com/sim-so-dep?trang=2";
 		URL url;
 		String content="";
 		String check = "";
+		String patter= "[0-9]{10,11}";
+		
 		ArrayList<String> al1 = new ArrayList<String>(); // mảng lưu tất cả các sđt
 		ArrayList<String> al2 = new ArrayList<String>(); // mảng lưu những sđt đã lọc ra
-		try {
+		try {  // đọc url
 			
 			url = new URL(link);
 			URLConnection connection = url.openConnection();
@@ -30,13 +38,17 @@ public class TestPhone {
 				content = content + line;
 				line = br.readLine();
 				
-				
 			}
 			br.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}
+		}   // hết đọc url
+		
+		//System.out.println(content);
+		
+		
+		
 		int kt = 0, last = -1;
 		int kt1=0,kt2=0;
 		do{
@@ -93,5 +105,5 @@ public class TestPhone {
 	}
 	
 	
-
+	
 }
