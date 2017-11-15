@@ -17,10 +17,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.JLabel;
@@ -28,6 +31,7 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.TextArea;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import java.awt.Frame;
 import javax.swing.GroupLayout;
@@ -59,53 +63,18 @@ public class tools {
 				}
 			}
 		});
-
-//		String link = "https://sites.google.com/site/huynhhoc/";
-//		URL url;
-//		String content = "";
-//		
-//
-//		try {
-//
-//			url = new URL(link);
-//			URLConnection connection = url.openConnection();
-//			InputStream inputstream = connection.getInputStream();
-//			BufferedReader br = new BufferedReader(new InputStreamReader(inputstream));
-//			String line = br.readLine();
-//
-//			while (line != null) {
-//				content = content + line;
-//				line = br.readLine();
-//
-//			}
-//			br.close();
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
-
 	}
-
-	/**
-	 * Create the application.
-	 */
 	public tools() {
 
 		initialize();
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-
 	private void initialize() {
 		
 		frmTruyXutWebsite = new JFrame();
 		frmTruyXutWebsite.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frmTruyXutWebsite.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTruyXutWebsite.setState(Frame.ICONIFIED);
-		
-		
+			
 		frmTruyXutWebsite.setLocationByPlatform(true);
 		frmTruyXutWebsite.setTitle("Truy xuất website");
 		frmTruyXutWebsite.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -113,7 +82,6 @@ public class tools {
 		frmTruyXutWebsite.getContentPane().setBackground(SystemColor.menu);
 		frmTruyXutWebsite.setBounds(100, 100, 650,450);
 		frmTruyXutWebsite.setResizable(false);
-		
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setForeground(Color.BLACK);
@@ -127,18 +95,11 @@ public class tools {
 		mntmXutFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-//					File f=new File("output.txt");
 					FileOutputStream fos=new FileOutputStream("output.txt",false);
 					PrintWriter pw = new PrintWriter(fos);
 					pw.println(textArea.getText());
-					
-//					FileWriter fw= new FileWriter(f);
-//					fw.write(email);
-//					fw.write(textArea.getText());
-//					fw.flush();
 					textArea.selectAll();
 					textArea.setText("Đã ghi vào file OUTPUT.TXT");
-//					fw.close();
 					pw.close();
 				}catch(IOException ex){
 					textArea.append("Lỗi ghi file !!");
@@ -178,7 +139,7 @@ public class tools {
 					InputStream inputstream = connection.getInputStream();
 					BufferedReader br = new BufferedReader(new InputStreamReader(inputstream));
 					String line = br.readLine();
-					
+		
 					while(line!=null)
 					{
 						content = content + line;
@@ -186,7 +147,6 @@ public class tools {
 					}
 					br.close();
 				} catch (Exception ex) {
-					// TODO: handle exception
 					ex.printStackTrace();
 				}
 				
@@ -213,57 +173,44 @@ public class tools {
 						if(ktphonevt10(phone))
 						{
 							al1.add(phone);
-//							textArea.append("\t"+phone+"\n");
 						}
 						if(ktphonevt11(phone))
 						{
 							al1.add(phone);
-//							textArea.append("\t"+phone+"\n");
 						}
 						if(ktphonemb10(phone))
 						{
-//							textArea.append("\t"+phone+"\n");
 							al1.add(phone);
 						}
 						if(ktphonemb11(phone))
 						{
-//							textArea.append("\t"+phone+"\n");
 							al1.add(phone);
 						}
 						if(ktphonevn10(phone))
 						{
-//							textArea.append("\t"+phone+"\n");
 							al1.add(phone);
 						}
 						if(ktphonevn11(phone))
 						{
-//							textArea.append("\t"+phone+"\n");
 							al1.add(phone);
 						}
-						
 						if(ktphonevnm10(phone))
 						{
-//							textArea.append("\t"+phone+"\n");
 							al1.add(phone);
 						}
 						if(ktphonevnm11(phone))
 						{
-//							textArea.append("\t"+phone+"\n");
 							al1.add(phone);
 						}
 						if(ktphoneg10(phone))
 						{
-//							textArea.append("\t"+phone+"\n");
 							al1.add(phone);
 						}
-						
 						last=kt+1;
 					}
-					
 				}while(kt != -1);
 				al2 = remove(al1);
 				for (String str2 : al2) {
-//					System.out.println(str2);
 					textArea.append("\t"+str2+"\n");
 				}
 			}
@@ -312,7 +259,6 @@ public class tools {
 					}
 					br.close();
 				} catch (Exception ex) {
-					// TODO: handle exception
 					ex.printStackTrace();
 				}
 				
@@ -337,8 +283,7 @@ public class tools {
 						String email = content.substring(kt1+1, kt2);
 						if(ktraemail(email))
 						{
-							//System.out.println(email);
-							al1.add(email);	// lưu tất cả các email 
+							al1.add(email);	 
 						}
 						last=kt+1;
 					}
@@ -346,11 +291,8 @@ public class tools {
 				}while(kt != -1);
 				al2 = remove(al1); 
 				for (String str2 : al2) {
-//					System.out.println(str2);
 					textArea.append("\t"+str2+"\n");
 				}
-			
-			
 			}
 		});
 		mnLcMail.add(mntmLcMailTrng);
@@ -360,13 +302,168 @@ public class tools {
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Lọc Yahoo Mail");
 		mnLcMail.add(mntmNewMenuItem);
+		
+		JMenu mnLcSnPhm = new JMenu("Lọc sản phẩm");
+		mnNewMenu_1.add(mnLcSnPhm);
+		
+		JMenu mnThGiiDi = new JMenu("Thế giới di động");
+		mnLcSnPhm.add(mnThGiiDi);
+		
+		JMenuItem mntminThoi = new JMenuItem("Điện thoại");
+		mntminThoi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				link = txtNhpaCh.getText();
+				
+				String kq ;
+				try{
+					URL url= new URL (link);
+					URLConnection urlConnection=url.openConnection();
+					HttpURLConnection connection=null;
+					if(urlConnection instanceof HttpURLConnection)
+					{
+						connection=(HttpURLConnection) urlConnection;
+					}
+					BufferedReader in= new BufferedReader(new InputStreamReader(connection.getInputStream()));
+					String urlString="";
+					String current;
+					while((current=in.readLine())!=null)
+					{
+						urlString+=current.trim();
+					}
+					in.close();
+					try
+					{	
+						Pattern pattern = Pattern.compile("(<li>?)(.*?)<h3>(?<n>[^<].*?)(</h3>)(<strong>)(.*?)(?<r>[^<].*?)(</strong>)");	
+					//	Pattern pattern = Pattern.compile("(<!--#region Thường-->)(<li>?)(.*?)<h3>(?<name>[^<].*?)(</h3><strong>)(?<rice>[^<].*?)(</strong>)");
+//						Pattern pattern = Pattern.compile("(<!--#region Online Giá Rẻ-->)(<li>?)(.*?)<h3>(?<n>[^<].*?)(</h3>)(<strong>)(?<r>[^<].*?)(</strong>)");
+						Matcher matcher = pattern.matcher(urlString);
+//						String rs=matcher.group("r").replaceAll("span>(.*?)</span>", "");
+						while (matcher.find()) {
+						  kq=matcher.group("n")+"\t"+  matcher.group("r").replaceAll("span>(.*?)</span>", "")+"\n";
+						  
+						  textArea.append(kq);
+						}
+						
+					}catch (Exception ex) {
+						textArea.append("Lỗi !!");
+					}	
+				}catch(IOException a)
+				{
+					a.printStackTrace();
+				}
+			}
+		});
+		mnThGiiDi.add(mntminThoi);
+		
+		JMenuItem mntmTabla = new JMenuItem("Tablet");
+		mntmTabla.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				link = txtNhpaCh.getText();
+				
+				String kq ;
+				try{
+					URL url= new URL (link);
+					URLConnection urlConnection=url.openConnection();
+					HttpURLConnection connection=null;
+					if(urlConnection instanceof HttpURLConnection)
+					{
+						connection=(HttpURLConnection) urlConnection;
+					}
+					BufferedReader in= new BufferedReader(new InputStreamReader(connection.getInputStream()));
+					String urlString="";
+					String current;
+					while((current=in.readLine())!=null)
+					{
+						urlString+=current.trim();
+					}
+					in.close();
+					try
+					{
+					Pattern pattern = Pattern.compile("(<li>?)(.*?)<h3>(?<n>[^<].*?)(</h3>)(<strong>)(.*?)(?<r>[^<].*?)(</strong>)");
+						
+//						Pattern pattern = Pattern.compile("(<!--#region Online Giá Rẻ-->)(<li>?)(.*?)<h3>(?<n>[^<].*?)(</h3>)(<strong>)(?<r>[^<].*?)(</strong>)");
+						Matcher matcher = pattern.matcher(urlString);
+//						String rs=matcher.group("r").replaceAll("span>(.*?)</span>", "");
+						while (matcher.find()) {
+						  kq=matcher.group("n")+"\t"+  matcher.group("r").replaceAll("span>(.*?)</span>", "")+"\n";
+						  
+						  textArea.append(kq);
+						}
+					}catch (Exception ex) {
+						textArea.append("Lỗi !!");
+					}	
+				}catch(IOException a)
+				{
+					a.printStackTrace();
+				}
+			}
+		});
+		mnThGiiDi.add(mntmTabla);
+		
+		JMenuItem mntmLaptop = new JMenuItem("Laptop");
+		mntmLaptop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				link = txtNhpaCh.getText();
+				String kq,kq1 ;
+				try{
+					URL url= new URL (link);
+					URLConnection urlConnection=url.openConnection();
+					HttpURLConnection connection=null;
+					if(urlConnection instanceof HttpURLConnection)
+					{
+						connection=(HttpURLConnection) urlConnection;
+					}
+					BufferedReader in= new BufferedReader(new InputStreamReader(connection.getInputStream()));
+					String urlString="";
+					String current;
+					while((current=in.readLine())!=null)
+					{
+						urlString+=current.trim();
+					}
+					in.close();
+					try
+					{
+						Pattern pattern = Pattern.compile("(<li.*?>)(.+?)(<div.*?>)(<h3>)(?<n>[^<].*?)(</strong>)");
+						
+						Matcher matcher = pattern.matcher(urlString);
+						while (matcher.find()) {
+						  kq=matcher.group("n").replaceAll("</h3>(.*?)<strong>","\t")+"\n";
+						  kq1=kq.replaceAll("<span>(.*?)</span>", "");
+						  textArea.append(kq1);
+						}
+					}catch (Exception ex) {
+						textArea.append("Lỗi !!");
+					}	
+					try
+					{
+						Pattern pattern = Pattern.compile("(<!--#region Thường-->)(<li.*?>)(.+?)(<div.*?>)(<h3>)(?<r>[^<].*?)(</strong>)");
+						
+						Matcher matcher = pattern.matcher(urlString);
+						while (matcher.find()) {
+						  kq=matcher.group("r").replaceAll("</h3>(.*?)<strong>","\t")+"\n";
+						  kq1=kq.replaceAll("<span>(.*?)</span>", "");
+						  textArea.append(kq1);
+						}
+					}catch (Exception ex) {
+						textArea.append("Lỗi !!");
+					}	
+				}catch(IOException a)
+				{
+					a.printStackTrace();
+				}
+			}
+		});
+		mnThGiiDi.add(mntmLaptop);
+		
+		
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				link = txtNhpaCh.getText();			
 				
 				URL url;
 				String content="";
-	
+				ArrayList<String> al1 = new ArrayList<String>();
+				ArrayList<String> al2 = new ArrayList<String>(); 
 				try {
 					
 					url = new URL(link);
@@ -382,7 +479,6 @@ public class tools {
 					}
 					br.close();
 				} catch (Exception ex) {
-					// TODO: handle exception
 					ex.printStackTrace();
 				}
 				
@@ -411,17 +507,16 @@ public class tools {
 						}
 						if(ktrayahoomail2(email))
 						{
-							textArea.append("\t"+email+"\n");
+							al1.add(email);
 						}
 						
 						last=kt+1;
 					}
-//					else
-//					{
-//						textArea.append("Không tìm thấy địa chỉ mail nào !!");
-//					}
-					
 				}while(kt != -1);
+				al2 = remove(al1); 
+				for (String str2 : al2) {
+					textArea.append("\t"+str2+"\n");
+				}
 			}
 		});
 		mntmLcGmail.addActionListener(new ActionListener() {
@@ -431,7 +526,8 @@ public class tools {
 				
 				URL url;
 				String content="";
-	
+				ArrayList<String> al1 = new ArrayList<String>();
+				ArrayList<String> al2 = new ArrayList<String>(); 
 				try {
 					
 					url = new URL(link);
@@ -447,7 +543,6 @@ public class tools {
 					}
 					br.close();
 				} catch (Exception ex) {
-					// TODO: handle exception
 					ex.printStackTrace();
 				}
 				
@@ -472,18 +567,16 @@ public class tools {
 						String email = content.substring(kt1+1, kt2);
 						if(ktragmail(email))
 						{
-							textArea.append("\t"+email+"\n");
+							al1.add(email);
 						}
 					
 						last=kt+1;
 					}
-//					else
-//					{
-//						textArea.append("Không tìm thấy địa chỉ mail nào !!");
-//					}
 				}while(kt != -1);
-				
-			
+				al2 = remove(al1); 
+				for (String str2 : al2) {
+					textArea.append("\t"+str2+"\n");
+				}
 			}
 		});
 		mntmLcSGphone.addActionListener(new ActionListener() {
@@ -508,7 +601,6 @@ public class tools {
 					}
 					br.close();
 				} catch (Exception ex) {
-					// TODO: handle exception
 					ex.printStackTrace();
 				}
 				ArrayList<String> al1 = new ArrayList<String>();
@@ -535,20 +627,13 @@ public class tools {
 						String phone = content.substring(kt1+1, kt2);
 						if(ktphoneg10(phone))
 						{
-//							textArea.append("Số Gmobie 10 so :\t"+phone+"\n");
 							al1.add(phone);
 						}
-						
 						last=kt+1;
 					}
-//					else 
-//					{
-//						textArea.append("Không tìm thấy số Gmobile nào !!");
-//					}
 				}while(kt != -1);
 				al2 = remove(al1);
 				for (String str2 : al2) {
-//					System.out.println(str2);
 					textArea.append("Số Gmobie 10 so :\t"+str2+"\n");
 				}
 			}
@@ -570,12 +655,9 @@ public class tools {
 					{
 						content = content + line;
 						line = br.readLine();
-						
-						
 					}
 					br.close();
 				} catch (Exception ex) {
-					// TODO: handle exception
 					ex.printStackTrace();
 				}
 				ArrayList<String> al1 = new ArrayList<String>();
@@ -604,20 +686,14 @@ public class tools {
 						String phone = content.substring(kt1+1, kt2);
 						if(ktphonevnm10(phone))
 						{
-//							textArea.append("Số Vietnamobile 10 so :\t"+phone+"\n");
 							al1.add(phone);
 						}
 						if(ktphonevnm11(phone))
 						{
 							al2.add(phone);
-//							textArea.append("Số Vietnamobile 11 so :\t"+phone+"\n");
 						}
 						last=kt+1;
 					}
-//					else 
-//					{
-//						textArea.append("Không tìm thấy số vietnamobile nào !!");
-//					}
 				}while(kt != -1);
 				al3 = remove(al1);
 				al4 =remove (al2);
@@ -646,12 +722,9 @@ public class tools {
 					{
 						content = content + line;
 						line = br.readLine();
-						
-						
 					}
 					br.close();
 				} catch (Exception ex) {
-					// TODO: handle exception
 					ex.printStackTrace();
 				}
 				ArrayList<String> al1 = new ArrayList<String>();
@@ -681,19 +754,13 @@ public class tools {
 						if(ktphonevn10(phone))
 						{
 							al1.add(phone);
-//							textArea.append("Số Vinaphone 10 so :\t"+phone+"\n");
 						}
 						if(ktphonevn11(phone))
 						{
 							al2.add(phone);
-//							textArea.append("Số Vinaphone 11 so :\t"+phone+"\n");
 						}
 						last=kt+1;
 					}
-//					else 
-//					{
-//						textArea.append("Không tìm thấy số vinaphone nào !!");
-//					}
 				}while(kt != -1);
 				al3 = remove(al1);
 				al4 =remove (al2);
@@ -757,19 +824,13 @@ public class tools {
 						if(ktphonemb10(phone))
 						{
 							al1.add(phone);
-//							textArea.append("Số Mobifone 10 so :\t"+phone+"\n");
 						}
 						if(ktphonemb11(phone))
 						{
 							al2.add(phone);
-//							textArea.append("Số Mobifone 11 so :\t"+phone+"\n");
 						}
 						last=kt+1;
 					}
-//					else 
-//					{
-//						textArea.append("Không tìm thấy số mobifone nào !!");
-//					}
 				}while(kt != -1);
 				al3 = remove(al1);
 				al4 =remove (al2);
@@ -833,20 +894,14 @@ public class tools {
 						if(ktphonevt10(phone))
 						{
 							al1.add(phone);
-//							textArea.append("Số Viettel 10 so :\t"+phone+"\n");
 						}
 						if(ktphonevt11(phone))
 						{
 							al2.add(phone);
-//							textArea.append("Số Viettel 11 so :\t"+phone+"\n");
 						}
 						
 						last=kt+1;
 					}
-//					else 
-//					{
-//						textArea.append("Không tìm thấy số viettel nào !!");
-//					}
 				}while(kt != -1);
 				al3 = remove(al1);
 				al4 =remove (al2);
@@ -860,8 +915,15 @@ public class tools {
 			}
 		});
 
-		JMenu mnNewMenu_2 = new JMenu("About");
-		menuBar.add(mnNewMenu_2);
+		JMenuItem mnabout = new JMenuItem("About");
+		mnabout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame f=new JFrame();
+				JOptionPane.showMessageDialog(f,"Đề tài : Extract information on the website by Regular Expression");
+//				textArea.append("Đang trong quá trình nâng cấp !!
+			}
+		});
+		menuBar.add(mnabout);
 
 		JToolBar toolBar = new JToolBar();
 		toolBar.setBackground(SystemColor.control);
@@ -892,7 +954,6 @@ public class tools {
 					}
 					br.close();
 				} catch (Exception ex) {
-					// TODO: handle exception
 					ex.printStackTrace();
 				}
 				
@@ -919,17 +980,10 @@ public class tools {
 						{
 							textArea.append("\t"+email+"\n");
 						}
-//						else
-//						{
-//							textArea.append("Không tìm thấy địa chỉ mail nào !!");
-//						}
 						last=kt+1;
 					}
-					
 				}while(kt != -1);
-				
 			}
-
 		});
 		btnNewButton.setBackground(SystemColor.scrollbar);
 		toolBar.add(btnNewButton);
@@ -952,12 +1006,9 @@ public class tools {
 					{
 						content = content + line;
 						line = br.readLine();
-						
-						
 					}
 					br.close();
 				} catch (Exception ex) {
-					// TODO: handle exception
 					ex.printStackTrace();
 				}
 				
@@ -1034,18 +1085,11 @@ public class tools {
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try{
-//					File f=new File("output.txt");
 					FileOutputStream fos=new FileOutputStream("output.txt",false);
 					PrintWriter pw = new PrintWriter(fos);
 					pw.println(textArea.getText());
-					
-//					FileWriter fw= new FileWriter(f);
-//					fw.write(email);
-//					fw.write(textArea.getText());
-//					fw.flush();
 					textArea.selectAll();
 					textArea.setText("Đã ghi vào file OUTPUT.TXT");
-//					fw.close();
 					pw.close();
 				}catch(IOException ex){
 					textArea.append("Lỗi ghi file !!");
@@ -1053,63 +1097,16 @@ public class tools {
 			}
 		});
 		
-		JButton btnLyHnhnh = new JButton("Lấy cmt");
+		JButton btnLyHnhnh = new JButton("Lấy bình luận");
 		btnLyHnhnh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				link = txtNhpaCh.getText();					
-				URL url;
-				String content="";
-				try {
-					
-					url = new URL(link);
-					URLConnection connection = url.openConnection();
-					InputStream inputstream = connection.getInputStream();
-					BufferedReader br = new BufferedReader(new InputStreamReader(inputstream));
-					String line = br.readLine();
-					
-					while(line!=null)
-					{
-						content = content + line;
-						line = br.readLine();
-					}
-					br.close();
-				} catch (Exception ex) {
-					// TODO: handle exception
-					ex.printStackTrace();
-				}
-				
-				textArea.selectAll();
-				textArea.setText("");
-				int kt = 0, last = -1;
-				int kt1=0,kt2=0;
-				do{
-					kt = content.indexOf("@", last+1);
-					if(kt != -1)
-					{
-						kt1=kt-1;
-						kt2=kt+1;
-						while(ktra3(content.charAt(kt1)))
-						{
-							kt1--;
-						}
-						while(ktra3(content.charAt(kt2)))
-						{
-							kt2++;
-						}
-						String img = content.substring(kt1+1, kt2);
-						if(ktimg(img))
-						{
-							textArea.append("\t"+img+"\n");
-
-						}
-						last=kt+1;
-					}
-					
-				}while(kt != -1);
+				JFrame f=new JFrame();
+				JOptionPane.showMessageDialog(f,"Đang trong quá trình nâng cấp");
+//				textArea.append("Đang trong quá trình nâng cấp !!");
 			}
 		});
 		btnLyHnhnh.setBackground(SystemColor.scrollbar);
-		btnLyHnhnh.setIcon(new ImageIcon("img/if_button_38_61409.png"));
+		btnLyHnhnh.setIcon(new ImageIcon("img/chat.png"));
 		toolBar.add(btnLyHnhnh);
 		btnNewButton_2.setBackground(SystemColor.scrollbar);
 		btnNewButton_2.setIcon(new ImageIcon("img/saveicon.png"));
@@ -1122,8 +1119,8 @@ public class tools {
 				
 				URL url;
 				String content="";
-				ArrayList<String> al1 = new ArrayList<String>();// mảng lưu tất cả các email
-				ArrayList<String> al2 = new ArrayList<String>(); // mảng lưu những email đã lọc ra
+				ArrayList<String> al1 = new ArrayList<String>();
+				ArrayList<String> al2 = new ArrayList<String>(); 
 				try {
 					
 					url = new URL(link);
@@ -1139,7 +1136,6 @@ public class tools {
 					}
 					br.close();
 				} catch (Exception ex) {
-					// TODO: handle exception
 					ex.printStackTrace();
 				}
 				
@@ -1164,8 +1160,7 @@ public class tools {
 						String email = content.substring(kt1+1, kt2);
 						if(ktraemail(email))
 						{
-							//System.out.println(email);
-							al1.add(email);	// lưu tất cả các email 
+							al1.add(email);	
 						}
 						last=kt+1;
 					}
@@ -1173,7 +1168,6 @@ public class tools {
 				}while(kt != -1);
 				al2 = remove(al1); 
 				for (String str2 : al2) {
-//					System.out.println(str2);
 					textArea.append("\t"+str2+"\n");
 				}
 				
@@ -1326,14 +1320,12 @@ public class tools {
 		boolean a = s.matches("^(018[68])[0-9]{7}$");
 		return a;
 	}
-	
 	private static boolean ktphoneg10(String s)
 	{	
 		boolean a = s.matches("^(099|0199)[0-9]{6,7}$");
 		return a;
 	}
 	private static boolean ktra3(char charAt) {
-		// TODO Auto-generated method stub
 		String s = new String();
 		s = charAt + "";
 		boolean a = s.matches("[a-zA-z0-9]");
@@ -1344,13 +1336,11 @@ public class tools {
 		boolean a = s.matches("<img.*?src=[\"](?<src>.*?)[\"](.*/>?)");
 		return a;
 	}
-	public static ArrayList<String> remove(ArrayList<String> arrList) // hàm xóa  trùng
+	public static ArrayList<String> remove(ArrayList<String> arrList)
 	{
 		 HashSet<String> h = new HashSet<String>(arrList);
 		    arrList.clear();
 		    arrList.addAll(h);
-		   
-		    return arrList;
-	                   
+		    return arrList;    
 	}
 }

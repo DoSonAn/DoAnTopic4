@@ -17,7 +17,7 @@ public class TestPhone {
 		
 		
 		
-		String link ="https://www.thegioididong.com/sim-so-dep?trang=2";
+		String link ="https://www.thegioididong.com/may-tinh-bang/ipad-wifi-32gb-2017";
 		URL url;
 		String content="";
 		String check = "";
@@ -45,7 +45,7 @@ public class TestPhone {
 			e.printStackTrace();
 		}   // hết đọc url
 		
-		//System.out.println(content);
+		System.out.println(content);
 		
 		
 		

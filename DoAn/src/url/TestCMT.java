@@ -19,7 +19,7 @@ public class TestCMT {
 
 	
 	public static void main(String[] args) {
-		String link ="https://www.thegioididong.com/dtdd/samsung-galaxy-s8-plus";
+		String link ="https://www.lazada.vn/bo-2-bot-ve-sinh-long-may-giat-han-quoc-10397531.html?spm=a2o4n.home.sku-feed-slider-with-banner_461834.18.BMf2bY";
 		URL url;
 		String content="";
 		String check = "";
@@ -43,40 +43,26 @@ public class TestCMT {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-/*		//String strP = "<div class="">(\\S+)</div>";
-		Pattern p = Pattern.compile("<div class=\"rc\">(?a)</div>");
-	    Matcher m = p.matcher(content);
 
-	    // if we find a match, get the group 
-	    if (m.find()) {
-
-	      // get the matching group
-	     // String codeGroup = m.group(1);
-	      
-	      // print the group
-	    System.out.println( m.group("a"));
-
-	
-	    }
-	    
-	  */
-	    
-		//final String str = "<tag>apple</tag><b>hello</b><tag>orange</tag><tag>pear</tag>";
-	    System.out.println(Arrays.toString(getTagValues(content).toArray())); // Prints [apple, orange, pear]
+		
+		String a = content.toString().replaceAll("</div>", "");
+	    System.out.println(Arrays.toString(getTagValues(a).toArray())); // Prints [apple, orange, pear]
 	}
 	
 	
 
 
-	private static final Pattern TAG_REGEX = Pattern.compile("<div class=\"rc\">(.+?)</div>");
+	private static final Pattern TAG_REGEX = Pattern.compile("<div class=\"c-rating-total__text-total-review\" data-qaa=\"c-rating-total__text-total-review\">(.+?)></div><div id=\"reviewslist\"    class=\"c-review-list\"    data-qaa=\"c-review-list\"    ");
 
-	    private static ArrayList getTagValues(final String str) {
-	        final ArrayList tagValues = new ArrayList();
-	        final Matcher matcher = TAG_REGEX.matcher(str);
-	        while (matcher.find()) {
-	            tagValues.add(matcher.group(1));
-	        }
-	        return tagValues;
+	private static ArrayList<String> getTagValues(final String str) {
+		
+	    final ArrayList<String> tagValues = new ArrayList<String>();
+	    final Matcher matcher = TAG_REGEX.matcher(str);
+	    while (matcher.find()) {
+	        tagValues.add(matcher.group(1));
+	      
 	    }
+	    return tagValues;
+	}
 	
 }
