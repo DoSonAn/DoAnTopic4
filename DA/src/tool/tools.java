@@ -333,8 +333,7 @@ public class tools {
 					in.close();
 					try
 					{	
-						Pattern pattern = Pattern.compile("(<li>?)(.*?)<h3>(?<n>[^<].*?)(</h3>)(<strong>)(.*?)(?<r>[^<].*?)(</strong>)");	
-					//	Pattern pattern = Pattern.compile("(<!--#region Thường-->)(<li>?)(.*?)<h3>(?<name>[^<].*?)(</h3><strong>)(?<rice>[^<].*?)(</strong>)");
+					Pattern pattern = Pattern.compile("(<li>?)(.*?)<h3>(?<n>[^<].*?)(</h3>)(<strong>)(.*?)(?<r>[^<].*?)(</strong>)");				
 //						Pattern pattern = Pattern.compile("(<!--#region Online Giá Rẻ-->)(<li>?)(.*?)<h3>(?<n>[^<].*?)(</h3>)(<strong>)(?<r>[^<].*?)(</strong>)");
 						Matcher matcher = pattern.matcher(urlString);
 //						String rs=matcher.group("r").replaceAll("span>(.*?)</span>", "");
@@ -915,15 +914,14 @@ public class tools {
 			}
 		});
 
-		JMenuItem mnabout = new JMenuItem("About");
-		mnabout.addActionListener(new ActionListener() {
+		JMenu mnNewMenu_2 = new JMenu("About");
+		mnNewMenu_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JFrame f=new JFrame();
-				JOptionPane.showMessageDialog(f,"Đề tài : Extract information on the website by Regular Expression");
-//				textArea.append("Đang trong quá trình nâng cấp !!
+				JOptionPane.showMessageDialog(f, "ádasdasd");
 			}
 		});
-		menuBar.add(mnabout);
+		menuBar.add(mnNewMenu_2);
 
 		JToolBar toolBar = new JToolBar();
 		toolBar.setBackground(SystemColor.control);
@@ -1097,17 +1095,53 @@ public class tools {
 			}
 		});
 		
-		JButton btnLyHnhnh = new JButton("Lấy bình luận");
+		JButton btnLyHnhnh = new JButton("Lấy sản phẩm");
 		btnLyHnhnh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame f=new JFrame();
-				JOptionPane.showMessageDialog(f,"Đang trong quá trình nâng cấp");
-//				textArea.append("Đang trong quá trình nâng cấp !!");
+				link = txtNhpaCh.getText();
+				
+				String kq ;
+				try{
+					URL url= new URL (link);
+					URLConnection urlConnection=url.openConnection();
+					HttpURLConnection connection=null;
+					if(urlConnection instanceof HttpURLConnection)
+					{
+						connection=(HttpURLConnection) urlConnection;
+					}
+					BufferedReader in= new BufferedReader(new InputStreamReader(connection.getInputStream()));
+					String urlString="";
+					String current;
+					while((current=in.readLine())!=null)
+					{
+						urlString+=current.trim();
+					}
+					in.close();
+					try
+					{	
+					Pattern pattern = Pattern.compile("(<li>?)(.*?)<h3>(?<n>[^<].*?)(</h3>)(<strong>)(.*?)(?<r>[^<].*?)(</strong>)");				
+//						Pattern pattern = Pattern.compile("(<!--#region Online Giá Rẻ-->)(<li>?)(.*?)<h3>(?<n>[^<].*?)(</h3>)(<strong>)(?<r>[^<].*?)(</strong>)");
+						Matcher matcher = pattern.matcher(urlString);
+//						String rs=matcher.group("r").replaceAll("span>(.*?)</span>", "");
+						while (matcher.find()) {
+						  kq=matcher.group("n")+"\t"+  matcher.group("r").replaceAll("span>(.*?)</span>", "")+"\n";
+						  
+						  textArea.append(kq);
+						}
+						
+					}catch (Exception ex) {
+						textArea.append("Lỗi !!");
+					}	
+				}catch(IOException a)
+				{
+					a.printStackTrace();
+				}
 			}
 		});
 		btnLyHnhnh.setBackground(SystemColor.scrollbar);
-		btnLyHnhnh.setIcon(new ImageIcon("img/chat.png"));
+		btnLyHnhnh.setIcon(new ImageIcon("img/file.png"));
 		toolBar.add(btnLyHnhnh);
+		
 		btnNewButton_2.setBackground(SystemColor.scrollbar);
 		btnNewButton_2.setIcon(new ImageIcon("img/saveicon.png"));
 		toolBar.add(btnNewButton_2);
